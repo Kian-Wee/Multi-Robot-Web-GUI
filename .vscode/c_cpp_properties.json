@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/kw/uwb_ws/devel/include/**",
+        "/home/kw/trajectory_ws/devel/include/**",
+        "/home/kw/borealis_ws/devel/include/**",
+        "/home/kw/catkin_ws/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/kw/catkin_ws/src/mavros/borealis_msgs/include/**",
+        "/home/kw/catkin_ws/src/mavros/libmavconn/include/**",
+        "/home/kw/catkin_ws/src/mavros/mavros/include/**",
+        "/home/kw/catkin_ws/src/mavros/mavros_msgs/include/**",
+        "/home/kw/uwb_ws/src/serial/include/**",
+        "/home/kw/catkin_ws/src/mavros/test_mavros/include/**",
+        "/home/kw/catkin_ws/src/uav_start_pose/include/**",
+        "/home/kw/catkin_ws/src/vrpn_client_ros-kinetic-devel/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
