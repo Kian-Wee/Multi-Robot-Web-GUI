@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Drone Swarm Web Portal</title>
+
+<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="semantic/dist/semantic.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+
+<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+<script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+
+<script type="text/javascript" type="text/javascript">
+  // Connecting to ROS
+  // -----------------
+
+  var ros = new ROSLIB.Ros({
+    url : 'ws://192.168.1.3:9090'
+  });
+
+  ros.on('connection', function() {
+    console.log('Connected to websocket server.');
+  });
+
+  ros.on('error', function(error) {
+    console.log('Error connecting to websocket server: ', error);
+  });
+
+  ros.on('close', function() {
+    console.log('Connection to websocket server closed.');
+  });
+/*
+  // Publishing a Topic
+  // ------------------
+
+  var cmdVel = new ROSLIB.Topic({
+    ros : ros,
+    name : '/cmd_vel',
+    messageType : 'geometry_msgs/Twist'
+  });
+
+  var twist = new ROSLIB.Message({
+    linear : {
+      x : 0.1,
+      y : 0.2,
+      z : 0.3
+    },
+    angular : {
+      x : -0.1,
+      y : -0.2,
+      z : -0.3
+    }
+  });
+  cmdVel.publish(twist);
+*/
+  // Subscribing to a Topic
+  // ----------------------
+
+  var listener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/listener',
+    messageType : 'std_msgs/String'
+  });
+
+  listener.subscribe(function(message) {
+    console.log('Received message on ' + listener.name + ': ' + message.data);
+    listener.unsubscribe();
+  });
+
+  // UAV Position
+  var uav1poslistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav1/mavros/local_position/pose',
+    messageType : 'geometry_msgs/PoseStamped'
+  });
+
+  uav1poslistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1poslistener.name + ': ' + message.pose.position.x);
+    // message.data.x
+    document.getElementById('posx').innerHTML = String(message.pose.position.x.toFixed(2));
+    document.getElementById('posy').innerHTML = String(message.pose.position.y.toFixed(2));
+    document.getElementById('posz').innerHTML = String(message.pose.position.z.toFixed(2));
+    //uav1poslistener.unsubscribe();
+  });
+
+  // UAV Battery
+  var uav1batlistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav1/mavros/battery',
+    messageType : 'sensor_msgs/BatteryState'
+  });
+
+  uav1batlistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1batlistener.name + ': ' + message.cell_voltage);
+    var average = message.cell_voltage.reduce((a, b) => a + b, 0) / message.cell_voltage.length;
+    if (average > 5){
+      average = average / 6;
+    }
+    var batper = (average-3.2)/(4.2-3.2) * 100;
+    document.getElementById('battery').innerHTML = String(batper.toFixed(2));
+    //uav1batlistener.unsubscribe();
+  });
+
+  // UAV State
+  var uav1statelistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav1/mavros/state',
+    messageType : 'mavros_msgs/State'
+  });
+
+  uav1statelistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1statelistener.name + ': ' + message.mode);
+    document.getElementById('mode').innerHTML = String(message.mode);
+    //uav1statelistener.unsubscribe();
+    const col1color = document.getElementById('col1');
+    if (message.armed===false){
+      col1color.style.backgroundColor = 'rgb(' + 245 + ',' + 184 + ',' + 184 + ')'; //red
+    } else if (message.mode=="OFFBOARD"){
+      col1color.style.backgroundColor = 'rgb(' + 184 + ',' + 198 + ',' + 245 + ')'; //blue
+    } else{
+      col1color.style.backgroundColor = 'rgb(' + 187 + ',' + 245 + ',' + 184 + ')'; //green
+    }
+  });
+
+  // UAV Mode
+  var uav1offstatelistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav1/hri_mode',
+    messageType : 'std_msgs/String'
+  });
+
+  uav1offstatelistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1statelistener.name + ': ' + message.mode);
+    document.getElementById('off_mode').innerHTML = String(message.data);
+    //uav1statelistener.unsubscribe();
+  });
+
+
+
+  // UAV Position
+  var uav2poslistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav2/mavros/local_position/pose',
+    messageType : 'geometry_msgs/PoseStamped'
+  });
+
+  uav2poslistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1poslistener.name + ': ' + message.pose.position.x);
+    // message.data.x
+    document.getElementById('posx2').innerHTML = String(message.pose.position.x.toFixed(2));
+    document.getElementById('posy2').innerHTML = String(message.pose.position.y.toFixed(2));
+    document.getElementById('posz2').innerHTML = String(message.pose.position.z.toFixed(2));
+    //uav1poslistener.unsubscribe();
+  });
+
+  // UAV Battery
+  var uav2batlistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav2/mavros/battery',
+    messageType : 'sensor_msgs/BatteryState'
+  });
+
+  uav2batlistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1batlistener.name + ': ' + message.cell_voltage);
+    var average = message.cell_voltage.reduce((a, b) => a + b, 0) / message.cell_voltage.length;
+    if (average > 5){
+      average = average / 6;
+    }
+    var batper = (average-3.2)/(4.2-3.2) * 100;
+    document.getElementById('battery2').innerHTML = String(batper.toFixed(2));
+    //uav1batlistener.unsubscribe();
+  });
+
+  // UAV State
+  var uav2statelistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav2/mavros/state',
+    messageType : 'mavros_msgs/State'
+  });
+
+  uav2statelistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1statelistener.name + ': ' + message.mode);
+    document.getElementById('mode2').innerHTML = String(message.mode);
+    const col1color = document.getElementById('col2');
+    if (message.armed===false){
+      col1color.style.backgroundColor = 'rgb(' + 245 + ',' + 184 + ',' + 184 + ')'; //red
+    } else if (message.mode=="OFFBOARD"){
+      col1color.style.backgroundColor = 'rgb(' + 184 + ',' + 198 + ',' + 245 + ')'; //blue
+    } else{
+      col1color.style.backgroundColor = 'rgb(' + 187 + ',' + 245 + ',' + 184 + ')'; //green
+    }
+    //uav1statelistener.unsubscribe();
+  });
+
+  // UAV Mode
+  var uav2offstatelistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav2/hri_mode',
+    messageType : 'std_msgs/String'
+  });
+
+  uav2offstatelistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1statelistener.name + ': ' + message.mode);
+    document.getElementById('off_mode2').innerHTML = String(message.data);
+    //uav1statelistener.unsubscribe();
+  });
+
+
+
+  // UAV Position
+  var uav3poslistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav3/mavros/local_position/pose',
+    messageType : 'geometry_msgs/PoseStamped'
+  });
+
+  uav3poslistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1poslistener.name + ': ' + message.pose.position.x);
+    // message.data.x
+    document.getElementById('posx3').innerHTML = String(message.pose.position.x.toFixed(2));
+    document.getElementById('posy3').innerHTML = String(message.pose.position.y.toFixed(2));
+    document.getElementById('posz3').innerHTML = String(message.pose.position.z.toFixed(2));
+    //uav1poslistener.unsubscribe();
+  });
+
+  // UAV Battery
+  var uav3batlistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav3/mavros/battery',
+    messageType : 'sensor_msgs/BatteryState'
+  });
+
+  uav3batlistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1batlistener.name + ': ' + message.cell_voltage);
+    var average = message.cell_voltage.reduce((a, b) => a + b, 0) / message.cell_voltage.length;
+    if (average > 5){
+      average = average / 6;
+    }
+    var batper = (average-3.2)/(4.2-3.2) * 100;
+    document.getElementById('battery3').innerHTML = String(batper.toFixed(2));
+    //uav1batlistener.unsubscribe();
+  });
+
+  // UAV State
+  var uav3statelistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav3/mavros/state',
+    messageType : 'mavros_msgs/State'
+  });
+
+  uav3statelistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1statelistener.name + ': ' + message.mode);
+    document.getElementById('mode3').innerHTML = String(message.mode);
+    const col1color = document.getElementById('col3');
+    if (message.armed===false){
+      col1color.style.backgroundColor = 'rgb(' + 245 + ',' + 184 + ',' + 184 + ')'; //red
+    } else if (message.mode=="OFFBOARD"){
+      col1color.style.backgroundColor = 'rgb(' + 184 + ',' + 198 + ',' + 245 + ')'; //blue
+    } else{
+      col1color.style.backgroundColor = 'rgb(' + 187 + ',' + 245 + ',' + 184 + ')'; //green
+    }
+    //uav1statelistener.unsubscribe();
+  });
+
+  // UAV Mode
+  var uav3offstatelistener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/uav3/hri_mode',
+    messageType : 'std_msgs/String'
+  });
+
+  uav3offstatelistener.subscribe(function(message) {
+    //console.log('Received message on ' + uav1statelistener.name + ': ' + message.mode);
+    document.getElementById('off_mode3').innerHTML = String(message.data);
+    //uav1statelistener.unsubscribe();
+  });
+
+</script>
+
+<style>
+  /*
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    gap: 10px;
+    padding: 10px;
+    align-content: center;
+  }
+  
+  .column {
+    gap: 10px;
+  } */
+  
+  .column_item {
+    /*background-color: rgb(245, 184, 184);
+    /*border: 1px solid rgba(0, 0, 0, 0.8);
+    gap: 10px;
+    padding: 5px; */
+    /* background-color: rgb(184, 198, 245);
+    background-color: rgb(187, 245, 184); */
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 35px;
+   }
+
+  </style>
+
+</head>
+
+<body style="background-color:rgb(226, 226, 226);">
+  <h1 class="ui header center aligned">Drone Swarm Web Portal</h1>
+
+  <div class="ui three column doubling stackable grid center aligned">
+
+    <div class="column" style="flex: 0 0 300px;">
+      <!-- ui raised segment -->
+      <div class="column_item" id="col1">UAV1
+      <p class="data_text">x: <strong><span id="posx"></span>m</strong></span></p>
+      <p class="data_text">y: <strong><span id="posy"></span>m</strong></span></p>
+      <p class="data_text">z: <strong><span id="posz"></span>m</strong></span></p>
+
+      <p class="data_text">Flight Mode: <strong><span id="mode"></span></strong></span></p>
+      <p class="data_text">Offboard Mode: <strong><span id="off_mode"></span></strong></span></p>
+      <p class="data_text">Battery: <strong><span id="battery"></span>%</strong></span></p>
+      </div>
+    </div>
+
+    <div class="column" style="flex: 0 0 300px;">
+    <div class="column_item" id="col2">UAV2
+      <p class="data_text">x: <strong><span id="posx2"></span>m</strong></span></p>
+      <p class="data_text">y: <strong><span id="posy2"></span>m</strong></span></p>
+      <p class="data_text">z: <strong><span id="posz2"></span>m</strong></span></p>
+
+      <p class="data_text">Flight Mode: <strong><span id="mode2"></span></strong></span></p>
+      <p class="data_text">Offboard Mode: <strong><span id="off_mode2"></span></strong></span></p>
+      <p class="data_text">Battery: <strong><span id="battery2"></span>%</strong></span></p>
+      </div>
+    </div>
+
+  <div class="column" style="flex: 0 0 300px;">
+  <div class="column_item" id="col3">UAV3
+      <p class="data_text">x: <strong><span id="posx3"></span>m</strong></span></p>
+      <p class="data_text">y: <strong><span id="posy3"></span>m</strong></span></p>
+      <p class="data_text">z: <strong><span id="posz3"></span>m</strong></span></p>
+
+      <p class="data_text">Flight Mode: <strong><span id="mode3"></span></strong></span></p>
+      <p class="data_text">Offboard Mode: <strong><span id="off_mode3"></span></strong></span></p>
+      <p class="data_text">Battery: <strong><span id="battery3"></span>%</strong></span></p>
+    </div>
+  </div>  
+
+  </div>
+
+  <div class="ui menu inverted footer segment"> 
+    <!-- ui attached stackable menu fixed footer -->
+    <div class="ui container">
+      <a class="item">
+        <i class="home icon" href="./index.html"></i> Home
+      </a>
+      <a class="item" href="./uav1.html">
+        <i class="grid layout icon" ></i> UAV1
+      </a>
+      <a class="item" href="./uav2.html">
+        <i class="grid layout icon"></i> UAV2
+      </a>
+      <a class="item" href="./uav3.html">
+        <i class="grid layout icon"></i> UAV3
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
