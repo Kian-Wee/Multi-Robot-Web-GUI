@@ -3,7 +3,7 @@ GUI used for monitoring and controlling multiple ROS robots through [roslibjs](h
 
 This specific website is for UAV's running mavros.
 
-
+Uses [Semantic-UI](https://semantic-ui.com/) for styling
 
 Dependencies
 
