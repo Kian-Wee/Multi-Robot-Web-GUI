@@ -1,5 +1,7 @@
 # Multi-Robot-Web-GUI
-GUI used for monitoring and controlling multiple ROS robots through [roslibjs](http://wiki.ros.org/roslibjs).
+GUI used for monitoring multiple ROS robots through [roslibjs](http://wiki.ros.org/roslibjs).
+
+![Imgur](https://imgur.com/h6uc5MN.png)
 
 This specific website is for UAV's running mavros.
 
