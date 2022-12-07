@@ -149,30 +149,28 @@
 
 <style>
   .column_item {
-    /*background-color: rgb(245, 184, 184);
-    /*border: 1px solid rgba(0, 0, 0, 0.8);
-    gap: 10px;
-    padding: 5px; */
-    /* background-color: rgb(184, 198, 245);
-    background-color: rgb(187, 245, 184); */
     font-size: 20px;
     text-align: center;
     border-radius: 10px;
   }
 
-  .footer{
+  /* .footer{
     position: sticky;
     bottom: 0vh;
     width: 100%;
-    height: 35px;
-
-  }
+  } */
   
+  .footer_pos{
+    position: sticky;
+    bottom: 0vh;
+    width: 100%;
+    /* height: 35px; */
+  }
 
    .left_joy {
     position: relative;
     bottom: 5px;
-    left: 10%;
+    left: 20%;
    }
   </style>
 
@@ -192,14 +190,36 @@
       <p class="data_text">Flight Mode: <strong><span id="mode"></span></strong></span></p>
       <p class="data_text">Offboard Mode: <strong><span id="off_mode"></span></strong></span></p>
       <p class="data_text">Battery: <strong><span id="battery"></span>%</strong></span></p>
+      <p class="data_text">a: <strong><span id="battery"></span>%</strong></span></p>
+
+      <div class="ui one cards">
+        <div class="card">
+            <div class="left aligned content">
+                Geeksforgeeks Left
+            </div>
+        </div>
+ 
+        <div class="card">
+            <div class="center aligned content">
+                Geeksforgeeks Center
+            </div>
+        </div>
+ 
+        <div class="card">
+            <div class="right aligned content">
+              <p class="data_text">a: <strong><span id="battery"></span>%</strong></span></p>
+                Geeksforgeeks Right
+            </div>
+        </div>
       </div>
 
       <div id="zone_joystick" class="column_item left_joy"></div>
+
     </div>
   </div>
     
-
-  <div class="ui menu inverted footer segment"> 
+  <div class="footer_pos">
+  <div class="ui menu inverted footer"> 
     <!-- ui attached stackable menu fixed footer -->
     <div class="ui container">
       <a class="item">
@@ -216,6 +236,7 @@
       </a>
     </div>
   </div>
+</div>
 
 </body>
 </html>

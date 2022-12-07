@@ -314,6 +314,18 @@
     font-size: 20px;
     text-align: center;
     border-radius: 10px;
+    opacity: 1;
+  }
+
+  .column_bg{
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    background: url(coax\ icon.png);
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    background-size: 200%;
+    opacity: 0.5;
   }
 
   .footer{
@@ -321,6 +333,10 @@
     bottom: 0;
     width: 100%;
     height: 35px;
+   }
+
+   .data_text .column_bg{
+    opacity: 1 !important;
    }
 
   </style>
@@ -332,10 +348,12 @@
 
   <div class="ui three column doubling stackable grid center aligned">
 
-    <div class="column" style="flex: 0 0 300px;">
+    <div class="column_bg column" style="flex: 0 0 300px;">
       <!-- ui raised segment -->
+      <div class="column_bg"></div>
       <div class="column_item" id="col1">UAV1
         <div class="ui divider"></div>
+        
       <p class="data_text">x: <strong><span id="posx"></span>m</strong></span></p>
       <p class="data_text">y: <strong><span id="posy"></span>m</strong></span></p>
       <p class="data_text">z: <strong><span id="posz"></span>m</strong></span></p>
@@ -343,6 +361,7 @@
       <p class="data_text">Flight Mode: <strong><span id="mode"></span></strong></span></p>
       <p class="data_text">Offboard Mode: <strong><span id="off_mode"></span></strong></span></p>
       <p class="data_text">Battery: <strong><span id="battery"></span>%</strong></span></p>
+      
       </div>
     </div>
 
