@@ -154,31 +154,29 @@
     border-radius: 10px;
   }
 
-  /* .footer{
-    position: sticky;
+  .footer{
+    position: absolute;
     bottom: 0vh;
     width: 100%;
-  } */
-  
-  .footer_pos{
-    position: sticky;
-    bottom: 0vh;
-    width: 100%;
-    /* height: 35px; */
   }
 
    .left_joy {
     position: relative;
-    bottom: 5px;
+    bottom: 10px;
     left: 20%;
    }
+
+   .stretchpage{
+      height: 100vh;
+   }
+
   </style>
 
 </head>
 
 <body style="background-color:rgb(226, 226, 226);">
 
-  <div class="ui three column doubling stackable grid left aligned">
+  <div class="ui three column doubling stackable grid left aligned stretchpage">
 
     <div class="column" style="flex: 0 0 300px;">
       <!-- ui raised segment -->
@@ -218,7 +216,7 @@
     </div>
   </div>
     
-  <div class="footer_pos">
+
   <div class="ui menu inverted footer"> 
     <!-- ui attached stackable menu fixed footer -->
     <div class="ui container">
@@ -235,7 +233,7 @@
         <i class="grid layout icon"></i> UAV3
       </a>
     </div>
-  </div>
+
 </div>
 
 </body>
