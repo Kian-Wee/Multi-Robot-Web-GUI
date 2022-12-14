@@ -148,39 +148,28 @@
 </script>
 
 <style>
-  .column_item {
-    font-size: 20px;
-    text-align: center;
-    border-radius: 10px;
-  }
-
-  .footer{
-    position: fixed;
-    bottom: 0vh;
-    width: 100%;
-  }
 
    .left_joy {
-    position: relative;
-    bottom: 10px;
-    left: 20%;
+    position: fixed;
+    bottom: 200px;
+    left: 100px;
    }
 
-   .stretchpage{
-      height: 100vh;
+   .right_joy {
+    position: fixed;
+    bottom: 200px;
+    right: 100px;
    }
-
-   body {
-    border: 5px solid ;
-  }
 
   </style>
 
+<link rel="stylesheet" href="/style.css">
+
 </head>
 
-<body style="background-color:rgb(226, 226, 226);">
-
-  <div class="ui three column doubling stackable grid left aligned stretchpage">
+<body">
+  <div class="stretchpage">
+  <div class="ui three column doubling stackable grid left aligned">
 
     <div class="column" style="flex: 0 0 300px;">
       <!-- ui raised segment -->
@@ -192,12 +181,11 @@
       <p class="data_text">Flight Mode: <strong><span id="mode"></span></strong></span></p>
       <p class="data_text">Offboard Mode: <strong><span id="off_mode"></span></strong></span></p>
       <p class="data_text">Battery: <strong><span id="battery"></span>%</strong></span></p>
-      <p class="data_text">a: <strong><span id="battery"></span>%</strong></span></p>
 
       <div class="ui one cards">
         <div class="card">
             <div class="left aligned content">
-                Geeksforgeeks Left
+                Flight Mode
             </div>
         </div>
  
@@ -216,6 +204,8 @@
       </div>
 
       <div id="zone_joystick" class="column_item left_joy"></div>
+
+      <div id="zone_joystick" class="column_item right_joy"></div>
 
     </div>
   </div>
@@ -239,6 +229,6 @@
     </div>
 
 </div>
-
+</div>
 </body>
 </html>

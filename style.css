@@ -1,0 +1,36 @@
+.footer{
+    position: fixed;
+    bottom: 0vh;
+    width: 100%;
+}
+
+body{
+    border: 5px solid ;
+    background-color:rgb(226, 226, 226);
+}
+
+.stretchpage{
+    height: 100vh;
+ }
+
+.data_text{
+    text-align: left;
+    padding-left: 10px;
+    border: 1px solid;
+    border-color: rgb(209, 209, 209);
+    border-left: 0;
+    border-right: 0;
+}
+
+.column_item {
+    /*background-color: rgb(245, 184, 184);
+    /*border: 1px solid rgba(0, 0, 0, 0.8);
+    gap: 10px;
+    padding: 5px; */
+    /* background-color: rgb(184, 198, 245);
+    background-color: rgb(187, 245, 184); */
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    opacity: 1;
+  }
