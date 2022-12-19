@@ -105,10 +105,10 @@
 
   createJoystick = function () {
     var options = {
-      zone: document.getElementById('zone_joystick'),
+      // zone: document.getElementById('zone_joystick'),
       threshold: 0.1,
       position: { bottom: '10%', left: '10%'},
-      mode: 'static',
+      mode: 'dynamic',
       size: 150,
       color: '#000000',
       maxNumberOfNipples: 2,
@@ -173,7 +173,8 @@
 
     <div class="column" style="flex: 0 0 300px;">
       <!-- ui raised segment -->
-      <div class="column_item" id="col1">UAV1
+      <div class="column_item" id="col1">
+      <p class= "left aligned data_text" >UAV1 <span id="ping">ping</span></p>
       <p class="data_text">x: <strong><span id="posx"></span>m</strong></span></p>
       <p class="data_text">y: <strong><span id="posy"></span>m</strong></span></p>
       <p class="data_text">z: <strong><span id="posz"></span>m</strong></span></p>
@@ -181,6 +182,8 @@
       <p class="data_text">Flight Mode: <strong><span id="mode"></span></strong></span></p>
       <p class="data_text">Offboard Mode: <strong><span id="off_mode"></span></strong></span></p>
       <p class="data_text">Battery: <strong><span id="battery"></span>%</strong></span></p>
+      <p class="data_text">Wifi Signal Strength: <strong><span id="battery"></span>%</strong></span></p>
+      <p class="data_text">Camera Feed: <strong><span id="battery"></span>%</strong></span></p>
 
       <div class="ui one cards">
         <div class="card">
@@ -190,22 +193,21 @@
         </div>
  
         <div class="card">
-            <div class="center aligned content">
-                Geeksforgeeks Center
+            <div class="left aligned content">
+                E Stop
             </div>
         </div>
  
         <div class="card">
-            <div class="right aligned content">
-              <p class="data_text">a: <strong><span id="battery"></span>%</strong></span></p>
-                Geeksforgeeks Right
+            <div class="left aligned content">
+                E Land
             </div>
         </div>
       </div>
 
-      <div id="zone_joystick" class="column_item left_joy"></div>
+      <div id="zone_joystick_l" class="column_item left_joy"></div>
 
-      <div id="zone_joystick" class="column_item right_joy"></div>
+      <div id="zone_joystick_r" class="column_item right_joy"></div>
 
     </div>
   </div>
