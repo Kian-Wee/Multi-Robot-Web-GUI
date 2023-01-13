@@ -334,8 +334,11 @@
   text-align: center;
   } */
 
-   .data_text .column_bg{
+   /* .data_text .column_bg{
     opacity: 1 !important;
+   } */
+   img {
+    opacity:0.5;
    }
   </style>
 
@@ -348,7 +351,8 @@
   <h1 class="ui header center aligned">Drone Swarm Web Portal</h1>
   <div class="ui three column doubling stackable grid center aligned">
 
-    <div class="column_bg column" style="flex: 0 0 300px;">
+    <!-- <div class="column_bg column" style="flex: 0 0 300px;"> -->
+    <div class="column" style="flex: 0 0 300px;">
       <!-- ui raised segment -->
       <div class="column_bg"></div>
       <div class="column_item" id="col1">UAV1
@@ -364,6 +368,12 @@
       
       </div>
     </div>
+
+    <div class="column" style="flex: 0 0 300px;">
+      <!-- ui raised segment -->
+      <img src="coax icon.png" >
+      
+    </div> 
 
     <div class="column" style="flex: 0 0 300px;">
     <div class="column_item" id="col2">UAV2
