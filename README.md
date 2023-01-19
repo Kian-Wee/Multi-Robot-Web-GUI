@@ -9,14 +9,16 @@ Uses [Semantic-UI](https://semantic-ui.com/) for styling
 
 Dependencies
 
--  [roslibjs](http://wiki.ros.org/roslibjs)
+-  [rosbridge suite](https://wiki.ros.org/rosbridge_suite)
 - python3
 
 
 
 Installation
 
-- Install roslibjs and cd to the source folder, and run 
+- Install roslibjs either through cloning the github repo and building or by installing (with ```sudo apt-get install ros-<rosdistro>-rosbridge-suite```)
+
+  cd to this project folder, and run 
 
   ``` roslaunch rosbridge.launch ```
 
