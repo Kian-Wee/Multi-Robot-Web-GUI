@@ -6,14 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Drone Swarm Web Portal</title>
 
-<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
 <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-<script src="semantic/dist/semantic.min.js"></script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+src="https://code.jquery.com/jquery-3.1.1.min.js"
+integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 
 <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
 <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
@@ -334,8 +332,11 @@
   text-align: center;
   } */
 
-   .data_text .column_bg{
+   /* .data_text .column_bg{
     opacity: 1 !important;
+   } */
+   img {
+    opacity:0.5;
    }
   </style>
 
@@ -348,7 +349,8 @@
   <h1 class="ui header center aligned">Drone Swarm Web Portal</h1>
   <div class="ui three column doubling stackable grid center aligned">
 
-    <div class="column_bg column" style="flex: 0 0 300px;">
+    <!-- <div class="column_bg column" style="flex: 0 0 300px;"> -->
+    <div class="column" style="flex: 0 0 300px;">
       <!-- ui raised segment -->
       <div class="column_bg"></div>
       <div class="column_item" id="col1">UAV1
@@ -364,6 +366,12 @@
       
       </div>
     </div>
+
+    <div class="column" style="flex: 0 0 300px;">
+      <!-- ui raised segment -->
+      <img src="coax icon.png" >
+      
+    </div> 
 
     <div class="column" style="flex: 0 0 300px;">
     <div class="column_item" id="col2">UAV2
