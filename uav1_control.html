@@ -115,20 +115,21 @@
     });
     var posestamped = new ROSLIB.Message({
       pose:{
-        point:{
+        position:{
           x: linear,
           y: 0,
           z: 0
-        }
-        quarternion:{
+        },
+        orientation:{
           x:0,
-          y=0,
-          z=0,
-          w=angular
+          y:0,
+          z:0,
+          w:angular
         }
       }
     });
-    cmd_vel_listener.publish(twist);
+
+    cmd_vel_listener.publish(posestamped);
   }
 
   // createJoystick = function () {
@@ -309,7 +310,6 @@
       <p class="data_text">Offboard Mode: <strong><span id="off_mode"></span></strong></span></p>
       <p class="data_text">Battery: <strong><span id="battery"></span>%</strong></span></p>
       <p class="data_text">Wifi Signal Strength: <strong><span id="battery"></span>%</strong></span></p>
-      <p class="data_text">Camera Feed: <strong><span id="battery"></span>%</strong></span></p>
 
       <div class="ui one cards">
         <div class="card">
@@ -328,6 +328,13 @@
             <div class="left aligned content">
                 E Land
             </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="left aligned content">
+            Camera Feed
+        </div>
         </div>
       </div>
 
