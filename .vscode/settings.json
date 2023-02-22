@@ -5,5 +5,12 @@
         "/home/kw/borealis_ws/devel/lib/python2.7/dist-packages",
         "/home/kw/catkin_ws/devel/lib/python2.7/dist-packages",
         "/opt/ros/melodic/lib/python2.7/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/kw/uwb_ws/devel/lib/python2.7/dist-packages",
+        "/home/kw/trajectory_ws/devel/lib/python2.7/dist-packages",
+        "/home/kw/borealis_ws/devel/lib/python2.7/dist-packages",
+        "/home/kw/catkin_ws/devel/lib/python2.7/dist-packages",
+        "/opt/ros/melodic/lib/python2.7/dist-packages"
     ]
 }
