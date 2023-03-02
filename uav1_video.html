@@ -165,12 +165,22 @@
 </head>
 
 <body>
+  <!-- <p class= "middle aligned " >Payload RGB</p>
+  <iframe src="http://localhost:8080/stream?topic=/d435i/color/image_raw&type=ros_compressed" style="width:100%; height:40%;"> </iframe>
+    <iframe src="http://localhost:8080/stream?topic=/d435i/color/image_raw&type=png" style="width:100%; height:40%;"> </iframe> -->
+  <p class= "middle aligned" style="color:grey;font-size:36px;" >Payload RGB</p>
+  <iframe src="http://localhost:8080/stream?topic=/image_topic_1&type=png" style="width:100%; height:40%;"> </iframe>
+  <p class= "middle aligned" style="color:grey;font-size:36px;" >Payload Depth</p>
+  <iframe src="http://localhost:8080/stream?topic=/image_topic_2&type=png" style="width:100%; height:40%;"> </iframe>
+  <div class="stretchpage">
 
- 
+    <!-- <div class="iframe-container">
+      <iframe src="http://localhost:8080/stream?topic=/d435i/color/image_raw"></iframe>
+    </div>           -->
 
-  <div class="stretchpage ">
+    <!-- <iframe src="http://localhost:8080/stream?topic=/d435i/color/image_raw" style="width:100%; height:100%;"> </iframe> -->
 
-       <iframe id="wrap" src="http://localhost:8080/stream?topic=/d435i/color/image_raw" style="width:100%; height:100%;"> <p>Your browser doesn't support iframes; <a href="url">view the content in your browser.</a></p> </iframe>
+    <!-- <iframe id="wrap" src="http://localhost:8080/stream?topic=/d435i/color/image_raw" style="width:100%; height:100%;"> <p>Your browser doesn't support iframes; <a href="url">view the content in your browser.</a></p> </iframe> -->
     <!-- <iframe class="responsive-iframe" src="http://localhost:8080/stream?topic=/d435i/color/image_raw"></iframe> -->
 
   <!-- <div class="ui three column doubling stackable grid left aligned">
