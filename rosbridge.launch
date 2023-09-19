@@ -3,4 +3,5 @@
      <arg name="port" value="9090"/>
      <!-- <arg name="address" default="192.168.1.3" /> -->
   </include>
+  <node pkg="web_video_server" type="web_video_server" name="web_video_server_node"/>
 </launch>
